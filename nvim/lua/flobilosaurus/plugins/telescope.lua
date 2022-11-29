@@ -12,8 +12,14 @@ end
 
 -- configure telescope
 telescope.setup({
+	pickers = {
+		find_files = {
+			hidden = true,
+		},
+	},
 	-- configure custom mappings
 	defaults = {
+		file_ignore_patterns = { "node_modules", ".git/" },
 		mappings = {
 			i = {
 				["<C-k>"] = actions.move_selection_previous, -- move to prev result

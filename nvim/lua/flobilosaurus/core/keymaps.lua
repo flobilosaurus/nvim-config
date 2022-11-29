@@ -7,11 +7,11 @@ local keymap = vim.keymap -- for conciseness
 -- general keymaps
 
 -- disable arrow keys
-keymap.set({ "i", "n" }, "<Up>", "")
-keymap.set({ "i", "n" }, "<Down>", "")
-keymap.set({ "i", "n" }, "<Left>", "")
-keymap.set({ "i", "n" }, "<Right>", "")
-
+-- keymap.set({ "i", "n" }, "<Up>", "")
+-- keymap.set({ "i", "n" }, "<Down>", "")
+-- keymap.set({ "i", "n" }, "<Left>", "")
+-- keymap.set({ "i", "n" }, "<Right>", "")
+--
 -- keymap.set("i", "jk", "<ESC>")
 
 wk.register({
@@ -35,6 +35,12 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
+-- delete and paste without overwriting register
+keymap.set("v", "<leader>p", '"_dP', { noremap = true })
+
+-- save
+
+keymap.set("n", "<c-s>", ":w<CR>")
 -- tabs
 -- wk.register({
 -- 	t = {
@@ -58,6 +64,7 @@ wk.register({
 		l = { ":TestLast<CR>", "Run last tests" },
 		g = { ":TestSuite<CR>", "Visit test file of last run tests" },
 	},
+	{ prefix = "<leader>" },
 })
 -- neo-tree
 keymap.set("n", "<leader>e", ":Neotree toggle reveal<CR>")

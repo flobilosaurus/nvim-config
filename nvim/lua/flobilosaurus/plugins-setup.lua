@@ -87,7 +87,8 @@ return packer.startup(function(use)
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
 	})
-
+	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
+	use({ "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" })
 	-- auto closing
 	use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
 	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
@@ -115,6 +116,7 @@ return packer.startup(function(use)
 	-- key suggestions
 	use("folke/which-key.nvim")
 
+	-- float term
 	use("voldikss/vim-floaterm")
 
 	if packer_bootstrap then
