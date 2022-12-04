@@ -39,8 +39,11 @@ wk.register({
 keymap.set("v", "<leader>p", '"_dP', { noremap = true })
 
 -- save
-
 keymap.set("n", "<c-s>", ":w<CR>")
+
+-- toggle colorscheme
+vim.keymap.set({"n", "t"}, "<c-t>", ":ToggleColorscheme<CR>", { noremap = true })
+
 -- tabs
 -- wk.register({
 -- 	t = {
@@ -86,5 +89,4 @@ keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current c
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
 -- toggle float terminal
-keymap.set("t", "<A-d>", "<cmd>FloatermToggle<CR>")
-keymap.set("n", "<A-d>", "<cmd>FloatermToggle<CR>")
+keymap.set({"n", "t"}, "<A-d>", "<cmd>FloatermToggle<CR>")

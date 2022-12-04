@@ -1,6 +1,14 @@
-local status, _ = pcall(vim.cmd, "colorscheme nightfox")
+local theme = os.getenv("theme")
+vim.api.nvim_create_user_command("ToggleColorscheme", function()
+	if vim.g.colors_name == "nightfox" then
+		pcall(vim.cmd, "colorscheme dayfox")
+	else
+		pcall(vim.cmd, "colorscheme nightfox")
+	end
+end, { nargs = 0 })
 
-if not status then
-	print("Colorscheme not found!")
-	return
+if theme == "light" then
+	pcall(vim.cmd, "colorscheme dayfox")
+else
+	pcall(vim.cmd, "colorscheme nightfox")
 end
