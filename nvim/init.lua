@@ -13,6 +13,8 @@ require("flobilosaurus.plugins.lsp.mason")
 require("flobilosaurus.plugins.lsp.lspsaga")
 require("flobilosaurus.plugins.lsp.lspconfig")
 require("flobilosaurus.plugins.lsp.null-ls")
+require("flobilosaurus.plugins.lsp.lsp-signature")
+require("flobilosaurus.plugins.lsp.symbols-outline")
 
 require("flobilosaurus.plugins.nvim-cmp")
 require("flobilosaurus.plugins.treesitter")

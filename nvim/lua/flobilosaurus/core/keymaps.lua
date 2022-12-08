@@ -21,7 +21,7 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
-keymap.set("n", "x", '"_x') -- dont save deleted char in register
+keymap.set("n", "x", '"_x', { desc = "delete char (without putting it in register)" })
 
 -- splits
 wk.register({
@@ -35,14 +35,22 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
--- delete and paste without overwriting register
-keymap.set("v", "<leader>p", '"_dP', { noremap = true })
+-- vertical movement remaps
+keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Jump half page down and center screen" })
+keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Jump half page up and center screen" })
+
+-- search remaps
+keymap.set("n", "n", "nzzzv", { desc = "Jump to next search result and and center screen" })
+keymap.set("n", "N", "Nzzzv", { desc = "Jump to previous search result and center screen" })
+keymap.set("n", "*", "*zz", { desc = "Search word under cursor and center screen" })
+
+keymap.set("v", "<leader>p", '"_dP', { desc = "delete and paste without overwriting register" })
 
 -- save
-keymap.set("n", "<c-s>", ":w<CR>")
+keymap.set("n", "<c-s>", ":w<CR>", { desc = "save buffer" })
 
 -- toggle colorscheme
-vim.keymap.set({"n", "t"}, "<c-t>", ":ToggleColorscheme<CR>", { noremap = true })
+vim.keymap.set({ "n", "t" }, "<c-t>", ":ToggleColorscheme<CR>")
 
 -- tabs
 -- wk.register({
@@ -89,4 +97,4 @@ keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current c
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
 -- toggle float terminal
-keymap.set({"n", "t"}, "<A-d>", "<cmd>FloatermToggle<CR>")
+keymap.set({ "n", "t" }, "<A-d>", "<cmd>FloatermToggle<CR>")
