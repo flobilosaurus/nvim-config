@@ -40,4 +40,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 	pattern = { "*" },
 })
 
+-- enable undofile (undo/redo will work even after closing a file)
 opt.undofile = true
+
+opt.colorcolumn = "79"

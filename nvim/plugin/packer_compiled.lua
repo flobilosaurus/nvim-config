@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/ReplaceWithRegister",
     url = "https://github.com/vim-scripts/ReplaceWithRegister"
   },
+  ["alpha-nvim"] = {
+    loaded = true,
+    path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -143,6 +148,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -240,6 +250,11 @@ _G.packer_plugins = {
     path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
     url = "https://github.com/simrat39/symbols-outline.nvim"
   },
+  tabular = {
+    loaded = true,
+    path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/tabular",
+    url = "https://github.com/godlygeek/tabular"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
@@ -259,6 +274,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/vim-floaterm",
     url = "https://github.com/voldikss/vim-floaterm"
+  },
+  ["vim-markdown"] = {
+    loaded = true,
+    path = "/Users/florian.balling/.local/share/nvim/site/pack/packer/start/vim-markdown",
+    url = "https://github.com/preservim/vim-markdown"
   },
   ["vim-maximizer"] = {
     loaded = true,
@@ -291,9 +311,9 @@ time([[Defining packer_plugins]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-treesitter ]]
+vim.cmd [[ packadd nvim-treesitter-context ]]
 vim.cmd [[ packadd nvim-ts-autotag ]]
 vim.cmd [[ packadd nvim-treesitter-textobjects ]]
-vim.cmd [[ packadd nvim-treesitter-context ]]
 time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false

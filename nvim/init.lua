@@ -8,6 +8,8 @@ require("flobilosaurus.plugins.lualine")
 require("flobilosaurus.plugins.telescope")
 require("flobilosaurus.plugins.which-key")
 require("flobilosaurus.plugins.vim-test")
+require("flobilosaurus.plugins.alpha")
+require("flobilosaurus.plugins.vim-markdown")
 
 require("flobilosaurus.plugins.lsp.mason")
 require("flobilosaurus.plugins.lsp.lspsaga")

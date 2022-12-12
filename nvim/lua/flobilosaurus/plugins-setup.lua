@@ -104,6 +104,18 @@ return packer.startup(function(use)
 	-- vim movement game
 	use("ThePrimeagen/vim-be-good")
 
+	-- markdown
+	use("godlygeek/tabular")
+	use("preservim/vim-markdown")
+
+	-- markdown preview
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
+
 	-- file explorer
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
@@ -114,6 +126,8 @@ return packer.startup(function(use)
 			"MunifTanjim/nui.nvim",
 		},
 	})
+	-- start screen
+	use("goolord/alpha-nvim")
 
 	-- vim test
 	use("vim-test/vim-test")
