@@ -21,12 +21,15 @@ null_ls.setup({
 		formatting.stylua, -- lua formatter
 		formatting.gofumpt,
 		formatting.goimports,
+		formatting.rustfmt,
+		formatting.black.with({ extra_args = { "--fast", "--line-length", "79", "--experimental-string-processing" } }),
 		diagnostics.eslint_d.with({ -- js/ts linter
 			-- only enable eslint if root has .eslintrc.js (not in youtube nvim video)
 			condition = function(utils)
 				return utils.root_has_file(".eslintrc.js") -- change file extension if you use something else
 			end,
 		}),
+		diagnostics.pylint,
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)

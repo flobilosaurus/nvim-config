@@ -44,3 +44,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 opt.undofile = true
 
 opt.colorcolumn = "79"
+
+-- no title on floating terminals
+vim.g.floaterm_title = ""

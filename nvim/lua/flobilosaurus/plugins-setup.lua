@@ -37,12 +37,22 @@ return packer.startup(function(use)
 
 	use("szw/vim-maximizer") --maximizes and restore current window
 
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("git-conflict").setup()
+		end,
+	})
 	-- essential plugins
 	use("tpope/vim-surround") -- change surrounding symbols
 	use("vim-scripts/ReplaceWithRegister")
 
 	-- commenting with gc
 	use("numToStr/Comment.nvim")
+
+	-- show indent
+	use("lukas-reineke/indent-blankline.nvim")
 
 	-- icons
 	use("kyazdani42/nvim-web-devicons")
@@ -100,6 +110,8 @@ return packer.startup(function(use)
 
 	-- git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+
+	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 
 	-- vim movement game
 	use("ThePrimeagen/vim-be-good")

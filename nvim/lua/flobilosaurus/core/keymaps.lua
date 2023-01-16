@@ -1,18 +1,15 @@
 vim.g.mapleader = " "
 
-local wk = require("which-key")
+local setup, wk = pcall(require, "which-key")
+if not setup then
+	return
+end
 
 local keymap = vim.keymap -- for conciseness
 
--- general keymaps
-
--- disable arrow keys
--- keymap.set({ "i", "n" }, "<Up>", "")
--- keymap.set({ "i", "n" }, "<Down>", "")
--- keymap.set({ "i", "n" }, "<Left>", "")
--- keymap.set({ "i", "n" }, "<Right>", "")
---
--- keymap.set("i", "jk", "<ESC>")
+-- search
+vim.keymap.set("n", "n", "nzzzv", { desc = "next and center screen" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "next (reverse) and center screen" })
 
 wk.register({
 	n = {
@@ -50,20 +47,7 @@ keymap.set("v", "<leader>p", '"_dP', { desc = "delete and paste without overwrit
 keymap.set("n", "<c-s>", ":w<CR>", { desc = "save buffer" })
 
 -- toggle colorscheme
-vim.keymap.set({ "n", "t" }, "<c-t>", ":ToggleColorscheme<CR>")
-
--- tabs
--- wk.register({
--- 	t = {
--- 		name = "tab",
--- 		o = { ":tabnew<CR>", "new" },
--- 		x = { ":tabclose<CR>", "close" },
--- 		n = { ":tabn<CR>", "next" },
--- 		p = { ":tabp<CR>", "previous" },
--- 	},
--- }, { prefix = "<leader>" })
-
--- plugin keymaps
+keymap.set({ "n", "t" }, "<c-t>", ":ToggleColorscheme<CR>")
 
 -- vim test asf
 wk.register({
@@ -78,23 +62,23 @@ wk.register({
 	{ prefix = "<leader>" },
 })
 -- neo-tree
-keymap.set("n", "<leader>e", ":Neotree toggle reveal<CR>")
+keymap.set("n", "<leader>e", ":Neotree toggle reveal<CR>", { desc = "toggle neotree" })
 
 -- telescope
-keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
-keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
-keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
+keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "find file" })
+keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", { desc = "find string" })
+keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<CR>", { desc = "find (string under) cursor" })
+keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "list open buffers" })
+keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "list help tags" })
 
--- telescope git commands
-keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
-keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
-keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
-keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
+keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "show commits" })
+keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<CR>", { desc = "show commits for buffer" })
+keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "show branches" })
+keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "git status" })
 
+-- neogit
 -- restart lsp server
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
 -- toggle float terminal
-keymap.set({ "n", "t" }, "<A-d>", "<cmd>FloatermToggle<CR>")
+keymap.set({ "n", "t" }, "<A-d>", "<cmd>FloatermToggle --title=''<CR>")

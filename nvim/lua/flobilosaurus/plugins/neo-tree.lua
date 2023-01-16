@@ -1,4 +1,4 @@
--- import gitsigns plugin safely
+-- import neotree plugin safely
 local setup, neotree = pcall(require, "neo-tree")
 if not setup then
 	return
