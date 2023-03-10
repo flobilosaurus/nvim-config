@@ -1,25 +1,18 @@
-require("flobilosaurus.plugins-setup")
-require("flobilosaurus.core.options")
+vim.g.mapleader = " "
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
 require("flobilosaurus.core.keymaps")
-require("flobilosaurus.core.colorscheme")
-require("flobilosaurus.plugins.comment")
-require("flobilosaurus.plugins.neo-tree")
-require("flobilosaurus.plugins.lualine")
-require("flobilosaurus.plugins.telescope")
-require("flobilosaurus.plugins.which-key")
-require("flobilosaurus.plugins.vim-test")
-require("flobilosaurus.plugins.alpha")
-require("flobilosaurus.plugins.vim-markdown")
-
-require("flobilosaurus.plugins.lsp.mason")
-require("flobilosaurus.plugins.lsp.lspsaga")
-require("flobilosaurus.plugins.lsp.lspconfig")
-require("flobilosaurus.plugins.lsp.null-ls")
-require("flobilosaurus.plugins.lsp.lsp-signature")
-require("flobilosaurus.plugins.lsp.symbols-outline")
-
--- require("flobilosaurus.plugins.nvim-cmp")
-require("flobilosaurus.plugins.treesitter")
-require("flobilosaurus.plugins.gitsigns")
-require("flobilosaurus.plugins.autopairs")
-require("flobilosaurus.plugins.neogit")
+require("flobilosaurus.core.options")
+require("lazy").setup("flobilosaurus.plugins")

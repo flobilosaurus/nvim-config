@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 local setup, wk = pcall(require, "which-key")
 if not setup then
 	return
@@ -8,9 +6,8 @@ end
 local keymap = vim.keymap -- for conciseness
 
 -- search
-vim.keymap.set("n", "n", "nzzzv", { desc = "next and center screen" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "next (reverse) and center screen" })
-
+keymap.set("n", "n", "nzzzv", { desc = "next and center screen" })
+keymap.set("n", "N", "Nzzzv", { desc = "next (reverse) and center screen" })
 wk.register({
 	n = {
 		name = "no",
@@ -46,39 +43,89 @@ keymap.set("v", "<leader>p", '"_dP', { desc = "delete and paste without overwrit
 -- save
 keymap.set("n", "<c-s>", ":w<CR>", { desc = "save buffer" })
 
--- toggle colorscheme
-keymap.set({ "n", "t" }, "<c-t>", ":ToggleColorscheme<CR>")
+local keymap = vim.keymap.set
 
--- vim test asf
-wk.register({
-	t = {
-		name = "test",
-		t = { ":TestNearest<CR>", "Run tests nearest to cursor" },
-		T = { ":TestFile<CR>", "Run all test in file" },
-		a = { ":TestSuite<CR>", "Run test suite" },
-		l = { ":TestLast<CR>", "Run last tests" },
-		g = { ":TestSuite<CR>", "Visit test file of last run tests" },
-	},
-	{ prefix = "<leader>" },
-})
--- neo-tree
-keymap.set("n", "<leader>e", ":Neotree toggle reveal<CR>", { desc = "toggle neotree" })
+-- LSP finder - Find the symbol's definition
+-- If there is no definition, it will instead be hidden
+-- When you use an action in finder like "open vsplit",
+-- you can use <C-t> to jump back
+keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
 
--- telescope
-keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "find file" })
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", { desc = "find string" })
-keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<CR>", { desc = "find (string under) cursor" })
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "list open buffers" })
-keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "list help tags" })
+-- Code action
+keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
-keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "show commits" })
-keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<CR>", { desc = "show commits for buffer" })
-keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "show branches" })
-keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "git status" })
+-- Rename all occurrences of the hovered word for the entire file
+keymap("n", "gr", "<cmd>Lspsaga rename<CR>")
 
--- neogit
--- restart lsp server
-keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+-- Rename all occurrences of the hovered word for the selected files
+keymap("n", "gr", "<cmd>Lspsaga rename ++project<CR>")
 
--- toggle float terminal
-keymap.set({ "n", "t" }, "<A-d>", "<cmd>FloatermToggle --title=''<CR>")
+-- Peek definition
+-- You can edit the file containing the definition in the floating window
+-- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+-- It also supports tagstack
+-- Use <C-t> to jump back
+keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
+
+-- Go to definition
+keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
+
+-- Peek type definition
+-- You can edit the file containing the type definition in the floating window
+-- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+-- It also supports tagstack
+-- Use <C-t> to jump back
+keymap("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>")
+
+-- Go to type definition
+keymap("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
+
+-- Show line diagnostics
+-- You can pass argument ++unfocus to
+-- unfocus the show_line_diagnostics floating window
+keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>")
+
+-- Show cursor diagnostics
+-- Like show_line_diagnostics, it supports passing the ++unfocus argument
+keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+
+-- Show buffer diagnostics
+keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+
+-- Diagnostic jump
+-- You can use <C-o> to jump back to your previous location
+keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+
+-- Diagnostic jump with filters such as only jumping to an error
+keymap("n", "[E", function()
+	require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end)
+keymap("n", "]E", function()
+	require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+end)
+
+-- Toggle outline
+keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+
+-- Hover Doc
+-- If there is no hover doc,
+-- there will be a notification stating that
+-- there is no information available.
+-- To disable it just use ":Lspsaga hover_doc ++quiet"
+-- Pressing the key twice will enter the hover window
+keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+
+-- If you want to keep the hover window in the top right hand corner,
+-- you can pass the ++keep argument
+-- Note that if you use hover with ++keep, pressing this key again will
+-- close the hover window. If you want to jump to the hover window
+-- you should use the wincmd command "<C-w>w"
+keymap("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
+
+-- Call hierarchy
+keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+
+-- Floating terminal
+keymap({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")

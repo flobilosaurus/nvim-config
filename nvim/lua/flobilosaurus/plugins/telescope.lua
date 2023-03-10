@@ -1,33 +1,21 @@
--- import telescope plugin safely
-local telescope_setup, telescope = pcall(require, "telescope")
-if not telescope_setup then
-	return
-end
-
--- import telescope actions safely
-local actions_setup, actions = pcall(require, "telescope.actions")
-if not actions_setup then
-	return
-end
-
--- configure telescope
-telescope.setup({
-	pickers = {
-		find_files = {
-			hidden = true,
+return {
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.1",
+		keys = {
+			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+			{ "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Find String" },
+			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffer" },
+			{ "<leader>fc", "<cmd>Telescope grep_string<cr>", desc = "Find under Cursor" },
 		},
+		config = function()
+			local telescope = require("telescope")
+			telescope.load_extension("fzf")
+		end,
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
 	},
-	-- configure custom mappings
-	defaults = {
-		file_ignore_patterns = { "node_modules", ".git/" },
-		mappings = {
-			i = {
-				["<C-k>"] = actions.move_selection_previous, -- move to prev result
-				["<C-j>"] = actions.move_selection_next, -- move to next result
-				["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
-			},
-		},
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make", -- dependency for better sorting performance
 	},
-})
-
-telescope.load_extension("fzf")
+}
