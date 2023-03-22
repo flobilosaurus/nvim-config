@@ -47,3 +47,5 @@ opt.colorcolumn = "79"
 
 -- no title on floating terminals
 vim.g.floaterm_title = ""
+
+vim.g.blamer_delay = 10

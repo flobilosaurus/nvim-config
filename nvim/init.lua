@@ -13,6 +13,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("lazy").setup("flobilosaurus.plugins")
 require("flobilosaurus.core.keymaps")
 require("flobilosaurus.core.options")
-require("lazy").setup("flobilosaurus.plugins")
