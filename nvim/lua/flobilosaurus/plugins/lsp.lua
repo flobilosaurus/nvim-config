@@ -49,6 +49,12 @@ return {
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 			local capabilities = cmp_nvim_lsp.default_capabilities()
 
+			-- folding
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
+			-- folding
 			local lspconfig = require("lspconfig")
 			-- configure html server
 			lspconfig["html"].setup({
@@ -105,6 +111,11 @@ return {
 			})
 
 			lspconfig["tflint"].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+
+			lspconfig["kotlin_language_server"].setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
