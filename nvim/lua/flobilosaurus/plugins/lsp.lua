@@ -54,6 +54,9 @@ return {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
 			}
+			require("neodev").setup({
+				-- add any options here, or leave empty to use the default settings
+			})
 			-- folding
 			local lspconfig = require("lspconfig")
 			-- configure html server
@@ -78,10 +81,14 @@ return {
 			lspconfig["lua_ls"].setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+
 				settings = {
 					-- custom settings for lua
 					Lua = {
 						-- make the language server recognize "vim" global
+						completion = {
+							callSnippet = "Replace",
+						},
 						diagnostics = {
 							globals = { "vim" },
 						},
@@ -95,6 +102,7 @@ return {
 					},
 				},
 			})
+
 			lspconfig["gopls"].setup({
 				on_attach = on_attach,
 				capabilities = capabilities,

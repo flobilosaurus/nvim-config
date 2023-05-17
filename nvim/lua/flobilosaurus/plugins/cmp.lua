@@ -11,11 +11,11 @@ return {
 					luasnip.lsp_expand(args.body)
 				end,
 			},
-
 			window = {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
+
 			mapping = cmp.mapping.preset.insert({
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
@@ -24,8 +24,8 @@ return {
 					-- they way you will only jump inside the snippet region
 					elseif luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
-					elseif has_words_before() then
-						cmp.complete()
+					-- elseif cmp.has_words_before() then
+					-- 	cmp.complete()
 					else
 						fallback()
 					end
