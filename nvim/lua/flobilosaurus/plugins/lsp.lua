@@ -1,4 +1,5 @@
 return {
+	{ "mfussenegger/nvim-jdtls" },
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
@@ -72,10 +73,10 @@ return {
 			})
 
 			-- configure tailwindcss server
-			lspconfig["tailwindcss"].setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			-- lspconfig["tailwindcss"].setup({
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- })
 
 			-- configure lua server (with special settings)
 			lspconfig["lua_ls"].setup({
@@ -165,10 +166,10 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig["jdtls"].setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			-- lspconfig["jdtls"].setup({
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- })
 		end,
 	},
 	{
